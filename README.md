@@ -10,8 +10,7 @@ In this project, I attempt to create a Bing News Analytics Platform. Data is pul
 
 ### Data Architecture
 
-
-If you decide to include this, you should also talk a bit about why you chose the architecture and tools you did for this project.
+![image](https://github.com/user-attachments/assets/9c5b291e-cf31-4fca-b927-25ab1c7378cb)
 
 
 
@@ -19,9 +18,7 @@ If you decide to include this, you should also talk a bit about why you chose th
 
 1. I learned how to use the API service in Azure.
 2. I learned how to use Pyspark to perform the data transformation
-   ```
-   df = spark.read.option('multiline','true').json("/mnt/sabingdataanalyticsyus/data/bing-latest-news.json")
-   ```
+3. I also learned how to use AZURE ML and perform sentiment analysis.
 
 
 ## Contact
