@@ -17,7 +17,12 @@ If you decide to include this, you should also talk a bit about why you chose th
 
 ## Lessons Learned
 
-It's good to reflect on what you learned throughout the process of building this project. Here you might discuss what you would have done differently if you had more time/money/data. Did you end up choosing the right tools or would you try something else next time?
+1. I learned how to use the API service in Azure.
+2. I learned how to use Pyspark to perform the data transformation
+   ```
+   df = spark.read.option('multiline','true').json("/mnt/sabingdataanalyticsyus/data/bing-latest-news.json")
+   ```
+
 
 ## Contact
 
