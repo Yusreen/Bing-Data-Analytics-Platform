@@ -14,7 +14,7 @@ In this project, I attempt to create a Bing News Analytics Platform. Data is pul
 
 
 ### Data Architecture
-<img src="https://github.com/user-attachments/assets/2be99fec-9b62-4d4e-b087-e1f749ba5c45" alt="Data Architecture" width="500"/>
+<img src="https://github.com/user-attachments/assets/2be99fec-9b62-4d4e-b087-e1f749ba5c45" alt="Data Architecture" width="800"/>
 
 
 ### Steps taken during the data transformation
