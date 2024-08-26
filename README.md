@@ -5,7 +5,7 @@ In this project, I attempt to create a Bing News Analytics Platform. Data is pul
 
 ### Data Visualization
 
-![image](https://github.com/user-attachments/assets/8f745159-7312-4d7c-9822-99913e48a201) alt="Data Architecture" width="500"
+<img src="https://github.com/user-attachments/assets/8f745159-7312-4d7c-9822-99913e48a201" alt="Data Visualization" width="500"/>
 
 
 ### Data Architecture
