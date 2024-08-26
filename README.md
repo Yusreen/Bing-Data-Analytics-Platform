@@ -12,7 +12,17 @@ In this project, I attempt to create a Bing News Analytics Platform. Data is pul
 <img src="https://github.com/user-attachments/assets/2be99fec-9b62-4d4e-b087-e1f749ba5c45" alt="Data Architecture" width="500"/>
 
 
-
+## Steps taken during the data transformation
+1. Understand how to read a JSON file in Pyspark.
+   ```
+   df = spark.read.option('multiline','true').json("/mnt/sabingdataanalyticsyus/data/bing-latest-news.json")
+```
+2. Transform a JSON column to multiple rows using the explode library
+```
+from pyspark.sql.functions import explode
+df_exploded = df.select(explode(df['value']).alias('json_object'))
+```
+Applied the explode function to the 'value' column of the DataFrame, transforming each element of the array into a separate row. The result is stored in a new DataFrame called df_exploded, with the column renamed to 'json_object'.
 
 ## Lessons Learned
 
