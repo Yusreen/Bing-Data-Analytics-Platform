@@ -3,9 +3,13 @@
 
 In this project, I attempt to create a Bing News Analytics Platform. Data is pulled from the Bing API, cleaned in Azure Databricks.Sentiment analysis is then performed using Azure ML. Tableau is then used to visualize the data.
 
-### Table Of Content
-[Data Visualization] (#data-visualization)
-[Data Architecture] (#data-architecture)
+## Table Of Contents
+1. [Data Visualization] (#data-visualization)
+2. [Data Architecture] (#data-architecture)
+
+
+
+
 ### Data Visualization
 
 <img src="https://github.com/user-attachments/assets/8f745159-7312-4d7c-9822-99913e48a201" alt="Data Visualization" width="500"/>
