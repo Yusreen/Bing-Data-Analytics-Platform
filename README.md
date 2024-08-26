@@ -13,16 +13,85 @@ In this project, I attempt to create a Bing News Analytics Platform. Data is pul
 
 
 ## Steps taken during the data transformation
-1. Understand how to read a JSON file in Pyspark.
+1. Understand how to read a JSON file in Pyspark
    ```bash
    df = spark.read.option('multiline','true').json("/mnt/sabingdataanalyticsyus/data/bing-latest-news.json")
 ```
 2. Transform a JSON column to multiple rows using the explode library
+
 ```bash
 from pyspark.sql.functions import explode
 df_exploded = df.select(explode(df['value']).alias('json_object'))
 ```
 Applied the explode function to the 'value' column of the DataFrame, transforming each element of the array into a separate row. The result is stored in a new DataFrame called df_exploded, with the column renamed to 'json_object'.
+
+3.  Converts each row in df_exploded to a JSON string and collects all of them into a list called json_list.
+```bash
+json_list = df_exploded.toJSON().collect()
+```
+4. Initializes empty lists to store the respective fields for all the JSON objects.
+```bash
+   description=[]
+title=[]
+category=[]
+image=[]
+url=[]
+provider=[]
+datePublished=[]
+```
+5. Iterates over each JSON string in json_list, parses it into a dictionary (article), and attempts to extract the specified fields. If the 'category' and 'contentUrl' fields are present, it appends the values to the respective lists. Errors in parsing are caught and printed.
+```bash
+   for json_str in json_list:
+    try:
+        article = json.loads(json_str)
+        
+        if article['json_object'].get('category') and article['json_object']['provider'][0].get('image', {}).get('thumbnail', {}).get('contentUrl'):
+
+         title.append(article['json_object']['name'])
+         description.append(article['json_object']['description'])
+         category.append(article['json_object']['category'])
+         image.append(article['json_object']['provider'][0]['image']['thumbnail']['contentUrl'])
+         url.append(article['json_object']['url'])
+         provider.append(article['json_object']['provider'][0]['name'])
+         datePublished.append(article['json_object']['datePublished'])
+
+    except Exception as e:
+        print(f"Error parsing {json_str}: {e}")
+```
+6. Imports StructField, StructType, and StringType from PySpark SQL types module. These are used to define the schema for a DataFrame.
+  ```bash
+  from pyspark.sql.types import StructField, StructType, StringType
+  ```
+7. Combines the lists into a list of tuples, where each tuple represents a row of data.
+```bash
+data = list(zip(title, description, category, image, url, provider, datePublished))
+```
+8.  Defines a schema for the new DataFrame, specifying the column names and their data types.
+   ```bash
+
+  schema = StructType(
+    [
+        StructField("title", StringType(), True),
+        StructField("description", StringType(), True),
+        StructField("category", StringType(), True),
+        StructField("image", StringType(), True),
+        StructField("url", StringType(), True),
+        StructField("provider", StringType(), True),
+        StructField("datePublished", StringType(), True)
+    ]
+ )
+```
+9. Creates a new DataFrame df_cleaned using the combined data and the defined schema.
+    ```bash
+df_cleaned = spark.createDataFrame(data, schema)
+
+    ```
+10. Imports the to_date and date_format functions from PySpark SQL functions.
+    ```bash
+    df_cleaned_final = df_cleaned.withColumn("datePublished", date_format(to_date("datePublished"), "dd-MM-yyyy"))
+
+    ```
+
 
 ## Lessons Learned
 
