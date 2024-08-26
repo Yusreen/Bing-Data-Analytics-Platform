@@ -18,7 +18,6 @@ In this project, I attempt to create a Bing News Analytics Platform. Data is pul
    df = spark.read.option('multiline','true').json("/mnt/sabingdataanalyticsyus/data/bing-latest-news.json")
 ```
 2. Transform a JSON column to multiple rows using the explode library
-
 ```bash
 from pyspark.sql.functions import explode
 df_exploded = df.select(explode(df['value']).alias('json_object'))
