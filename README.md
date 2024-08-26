@@ -13,7 +13,7 @@ In this project, I attempt to create a Bing News Analytics Platform. Data is pul
 <img src="https://github.com/user-attachments/assets/2be99fec-9b62-4d4e-b087-e1f749ba5c45" alt="Data Architecture" width="500"/>
 
 
-## Steps taken during the data transformation
+### Steps taken during the data transformation
 1. Understand how to read a JSON file in Pyspark
 ```bash
    df = spark.read.option('multiline','true').json("/mnt/sabingdataanalyticsyus/data/bing-latest-news.json")
@@ -95,6 +95,55 @@ df_cleaned = spark.createDataFrame(data, schema)
 df_cleaned_final.write.format("delta").mode("overwrite").save("/mnt/<path>")
 
 ```
+### Pseudocode
+
+Certainly! Here's a pseudocode version of the provided code:
+
+1. Import necessary libraries:
+Import all functions from PySpark SQL.
+Import the json module for handling JSON data.
+2. Read JSON file into a DataFrame:
+Set multiline option to true and read the JSON file from the specified path into a DataFrame (df).
+3. Display the DataFrame:
+Display the contents of the DataFrame.
+4. Select specific column:
+Select the 'value' column from the DataFrame and create a new DataFrame (df).
+5. Display the updated DataFrame:
+Display the contents of the updated DataFrame.
+6. Explode the DataFrame:
+Import the explode function.
+Apply explode to the 'value' column to create multiple rows from the array and rename the resulting column to 'json_object'.
+Store the exploded data in a new DataFrame (df_exploded).
+7. Display the exploded DataFrame:
+Display the contents of the exploded DataFrame.
+8. Convert DataFrame to JSON strings:
+Convert each row in the exploded DataFrame to a JSON string and collect them into a list (json_list).
+9. Print the JSON list:
+Print the entire list of JSON strings.
+10. Parse the last JSON string:
+Parse the last JSON string in the list into a Python dictionary (news_json).
+11. Print specific fields from the dictionary:
+Print various fields (description, name, category, url, contentUrl, provider, datePublished) from the dictionary.
+12. Initialize lists to store fields:
+Create empty lists to store the title, description, category, image, url, provider, and datePublished fields.
+13. Iterate over the JSON list:
+For each JSON string in the list:
+ Parse the string into a dictionary (article).
+ Check if 'category' and 'contentUrl' exist.
+ If they exist, append the respective values to the corresponding lists.
+ Handle any parsing errors.
+14. Define schema for new DataFrame:
+Define the schema with title, description, category, image, url, provider, and datePublished as columns, all of type String.
+15. Create new DataFrame:
+Combine the lists into a list of tuples (data).
+Create a new DataFrame (df_cleaned) using the combined data and defined schema.
+Display the cleaned DataFrame:
+Display the contents of the cleaned DataFrame.
+16. Format the date column:
+Convert the 'datePublished' column to the dd-MM-yyyy format and update the DataFrame (df_cleaned_final).
+17. Display the final cleaned DataFrame:
+Display the contents of the final cleaned DataFrame.
+Write the final cleaned DataFrame to a Delta table at the specified path, overwriting any existing data.
 
 
 ## Lessons Learned
