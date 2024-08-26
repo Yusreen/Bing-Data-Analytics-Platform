@@ -86,10 +86,15 @@ data = list(zip(title, description, category, image, url, provider, datePublishe
 df_cleaned = spark.createDataFrame(data, schema)
 ```
 10. Imports the to_date and date_format functions from PySpark SQL functions.
-    ```bash
+```bash
     df_cleaned_final = df_cleaned.withColumn("datePublished", date_format(to_date("datePublished"), "dd-MM-yyyy"))
 
-    ```
+```
+11. Writes the df_cleaned_final DataFrame to a Delta table at the specified path, overwriting any existing data.
+```bash
+df_cleaned_final.write.format("delta").mode("overwrite").save("/mnt/<path>")
+
+```
 
 
 ## Lessons Learned
