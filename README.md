@@ -9,8 +9,8 @@ In this project, I attempt to create a Bing News Analytics Platform. Data is pul
 
 
 ### Data Architecture
+![image](https://github.com/user-attachments/assets/2be99fec-9b62-4d4e-b087-e1f749ba5c45)
 
-![image](https://github.com/user-attachments/assets/9c5b291e-cf31-4fca-b927-25ab1c7378cb)
 
 
 
